@@ -27,6 +27,13 @@
         "prettier/prettier": "warn",
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "react/state-in-constructor": "off"
+        "react/state-in-constructor": "off",
+        "react/self-closing-comp": "warn",
+        "no-unused-vars": "warn",
+        "react/require-default-props": "off",
+        "arrow-body-style": "off",
+        "import/prefer-default-export": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/no-array-index-key": "off"
     }
 }
