@@ -3,6 +3,7 @@ import { ADD_REVIEWS, GET_REVIEWS, RESET_REVIEWS, REQUEST_ERROR } from './review
 const initialValue = {
   loading: false,
   data: [],
+  totalCount: 0,
   error: '',
 };
 
@@ -17,7 +18,8 @@ export const reviewsReducer = (state = initialValue, action) => {
     case ADD_REVIEWS:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload.data,
+        totalCount: action.payload.totalCount,
         loading: false,
       };
     case REQUEST_ERROR:

@@ -3,7 +3,10 @@ export const ADD_REVIEWS = 'ADD_REVIEWS';
 export const RESET_REVIEWS = 'RESET_REVIEWS';
 export const REQUEST_ERROR = 'REQUEST_ERROR';
 
-export const getReviews = () => ({ type: GET_REVIEWS });
+export const getReviews = (payload) => ({
+  type: GET_REVIEWS,
+  payload,
+});
 export const addReviews = (payload) => ({
   type: ADD_REVIEWS,
   payload,

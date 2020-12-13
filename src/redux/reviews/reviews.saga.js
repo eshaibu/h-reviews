@@ -2,16 +2,14 @@ import axios from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { addReviews, GET_REVIEWS, setRequestError } from './reviews.action';
 
-function* handleGetReviews() {
+function* handleGetReviews(action) {
   try {
-    const path = `https://interview-task-api.bookiply.io/reviews`;
-
+    const path = `https://interview-task-api.bookiply.io/reviews?${action.payload}`;
     const response = yield call(axios.get, path);
-    console.log('response headers>>>>>', response.headers);
+    const totalCount = parseInt(response.headers['x-total-count'], 10);
 
-    yield put(addReviews(response.data));
+    yield put(addReviews({ data: response.data, totalCount }));
   } catch (error) {
-    console.log(error, '>>>>>>>>error');
     yield put(setRequestError(error.message || 'Oops! Something went wrong.'));
   }
 }

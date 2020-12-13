@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 import headerImage from '../assets/images/background.png';
-import { getTextStyle } from '../style-helpers';
+import { getTextStyle } from '../utils/style-helpers';
 
 export const container = css`
   width: 100%;

@@ -10,9 +10,10 @@ export const colors = {
   primary: '#173753',
   white: '#ffffff',
   blue: '#0576db',
-  gray: '#8d919b',
   gray1: '#e0e4e8',
   gray2: '#c3c8d2',
+  gray3: '#8d919b',
+  gray4: '#212529',
 };
 
 const fontSize = {
