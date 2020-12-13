@@ -9,6 +9,7 @@ export const reviewsContainer = css`
   display: flex;
   flex-direction: column;
   padding: 30px 25px;
+  min-height: 70vh;
   border-radius: 1rem;
   ${contentWidth}
 `;
@@ -23,8 +24,8 @@ export const mLeft16 = css`
 
 export const reviewDiv = css`
   border-bottom: 1px solid #e0e4e8;
-  padding-bottom: 1.2rem;
-  margin-bottom: 1.2rem;
+  padding-bottom: 1.6rem;
+  margin-bottom: 1.6rem;
   color: ${colors.primary};
 
   p:first-of-type {

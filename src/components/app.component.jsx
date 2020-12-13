@@ -2,7 +2,7 @@ import { injectGlobal } from '@emotion/css';
 import { container, headerBackground, headerText } from './app.style';
 import { ReviewList } from './reviews';
 
-function App() {
+const App = () => {
   return (
     <div className={container}>
       <div className={headerBackground} />
@@ -13,7 +13,7 @@ function App() {
       <ReviewList />
     </div>
   );
-}
+};
 
 export default App;
 
@@ -33,6 +33,7 @@ injectGlobal`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    height:100%;
     min-height: 100vh;
     font-size: 1.6rem;
     background-color: #f5f8f9;

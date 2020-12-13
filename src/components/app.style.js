@@ -10,20 +10,20 @@ export const container = css`
 `;
 
 export const headerBackground = css`
-  width: 100vw;
+  width: 100%;
   height: 480px;
   position: absolute;
   top: 0px;
   left: 0px;
-  z-index: -1;
-  background-size: cover;
   background: black;
-  overflow: hidden;
   background: -webkit-linear-gradient(rgba(5, 6, 15, 0.4), rgba(5, 6, 15, 0.4)),
     url(${headerImage}) no-repeat center;
   background: linear-gradient(rgba(5, 6, 15, 0.4), rgba(5, 6, 15, 0.4)),
     url(${headerImage}) no-repeat center;
   filter: contrast(120%) brightness(140%);
+  background-size: cover;
+  overflow: hidden;
+  z-index: -1;
   border-bottom-right-radius: 60% 10%;
   border-bottom-left-radius: 60% 10%;
 
@@ -32,7 +32,7 @@ export const headerBackground = css`
   }
 
   @media (max-width: 479.98px) {
-    max-height: 150px;
+    max-height: 200px;
   }
 `;
 

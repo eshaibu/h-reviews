@@ -30,6 +30,7 @@
         "react/state-in-constructor": "off",
         "react/self-closing-comp": "warn",
         "no-unused-vars": "warn",
+        "import/no-named-as-default": "off",
         "react/require-default-props": "off",
         "arrow-body-style": "off",
         "import/prefer-default-export": "off",
