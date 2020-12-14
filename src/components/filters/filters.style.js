@@ -47,44 +47,28 @@ export const filterCheckboxDiv = css`
   }
 `;
 
-export const filterButtonsContainer = css`
-  display: flex;
-  justify-content: flex-start;
+export const resetButton = css`
+  display: inline-block;
   margin-top: 1.6rem;
+  margin-bottom: 0;
+  min-width: 10rem;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 1rem 1.2rem;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #fff;
+  background-color: ${colors.primary};
+  border: 1px solid transparent;
 
-  button {
-    display: inline-block;
-    margin-bottom: 0;
-    width: 8rem;
-    font-weight: 600;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    white-space: nowrap;
-    padding: 1rem 1.2rem;
-    font-size: 1.6rem;
-    line-height: 1.2;
-    border-radius: 2px;
-    border: 1px solid transparent;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-
-  button:first-of-type {
-    margin-right: 1rem;
-    color: #fff;
-    background-color: ${colors.gray3};
-    &:hover {
-      background-color: ${colors.gray2};
-    }
-  }
-
-  button:nth-of-type(2) {
-    color: #fff;
-    background-color: ${colors.primary};
-    border: 1px solid transparent;
-    &:hover {
-      opacity: 0.8;
-    }
+  &:hover {
+    opacity: 0.8;
   }
 `;

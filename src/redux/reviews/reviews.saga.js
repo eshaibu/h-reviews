@@ -7,6 +7,7 @@ function* handleGetReviews(action) {
   try {
     const filterObject = JSON.parse(action.payload);
     const queryFilters = queryString.stringify(filterObject);
+    console.log('filterObject', filterObject);
     console.log('queryFilters', queryFilters);
 
     const path = `https://interview-task-api.bookiply.io/reviews?${queryFilters}`;

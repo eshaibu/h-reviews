@@ -18,13 +18,13 @@ export const ReviewList = () => {
   const reviews = useSelector((state) => state.reviews);
   const { data, error, loading, totalCount } = reviews;
 
-  const paginationString = JSON.stringify({ _page, _limit });
+  const filterString = JSON.stringify({ _page, _limit, channel: channels });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getReviews(paginationString));
-  }, [paginationString, getReviews]);
+    dispatch(getReviews(filterString));
+  }, [filterString, getReviews]);
 
   const onLimitChange = (item) => {
     setCurrentPage(1);
@@ -35,19 +35,21 @@ export const ReviewList = () => {
     setCurrentPage(page);
   };
 
-  const filterCheckboxOnChange = (event) => {
+  const onChannelChange = (event) => {
     const { name, checked } = event.target;
     const updatedChannels = checked
       ? [...channels, name]
       : channels.filter((item) => {
           return item !== name;
         });
+    setCurrentPage(1);
     setChannels(updatedChannels);
-    console.log('setFilters', updatedChannels);
   };
 
   const clearFilters = () => {
     console.log('clearFilters');
+    setCurrentPage(1);
+    setChannels([]);
   };
 
   return (
@@ -58,9 +60,8 @@ export const ReviewList = () => {
 
           <Filter
             selectedChannels={channels}
-            checkBoxOnChange={filterCheckboxOnChange}
+            onChannelChange={onChannelChange}
             clearFilters={clearFilters}
-            applyFilters={clearFilters}
           />
 
           {data.map((review, index) => (

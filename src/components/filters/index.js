@@ -1,16 +1,11 @@
 import { arrayOf, func, string } from 'prop-types';
-import {
-  filterContainer,
-  filterInputsDiv,
-  filterCheckboxDiv,
-  filterButtonsContainer,
-} from './filters.style';
+import { filterContainer, filterInputsDiv, filterCheckboxDiv, resetButton } from './filters.style';
 import Checkbox from '../form-fields/checkbox';
 
 const channels = ['AIRBNB', 'HOLIDU', 'BOOKINGCOM'];
 
 const Filter = (props) => {
-  const { selectedChannels, checkBoxOnChange, clearFilters, applyFilters } = props;
+  const { selectedChannels, onChannelChange, clearFilters } = props;
 
   return (
     <div className={filterContainer}>
@@ -21,7 +16,7 @@ const Filter = (props) => {
             {channels.map((channel, index) => (
               <Checkbox
                 key={index}
-                onChange={checkBoxOnChange}
+                onChange={onChannelChange}
                 selectedChannels={selectedChannels}
                 name={channel}
                 label={channel}
@@ -30,23 +25,22 @@ const Filter = (props) => {
           </div>
         </div>
       </div>
-      <div className={filterButtonsContainer}>
-        <button type="button" onClick={clearFilters}>
-          Clear
-        </button>
-        <button type="button" onClick={applyFilters}>
-          Apply
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={clearFilters}
+        disabled={!selectedChannels.length}
+        className={resetButton}
+      >
+        Clear Filters
+      </button>
     </div>
   );
 };
 
 Filter.propTypes = {
   selectedChannels: arrayOf(string).isRequired,
-  checkBoxOnChange: func.isRequired,
+  onChannelChange: func.isRequired,
   clearFilters: func.isRequired,
-  applyFilters: func.isRequired,
 };
 
 export default Filter;
