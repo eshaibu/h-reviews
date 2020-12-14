@@ -35,7 +35,11 @@ injectGlobal`
     -moz-osx-font-smoothing: grayscale;
     height:100%;
     min-height: 100vh;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     background-color: #f5f8f9;
+    
+    @media (min-width: 340px) {
+      font-size: 1.6rem;
+    }
   }
 `;

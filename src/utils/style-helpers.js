@@ -21,23 +21,22 @@ const fontSize = {
     s1: '3rem',
     s2: '2rem',
     s3: '1.8rem',
-    s4: '1.6rem',
     s5: '1.4rem',
   },
   md: {
     s1: '2.4rem',
     s2: '1.8rem',
-    s3: '1.4rem',
-    s4: '1.2rem',
+    s3: '1.6rem',
+    s4: '1.4rem',
   },
 };
 
 const getFontSize = (size) => {
   return css`
-    font-size: ${fontSize.lg[size]};
+    font-size: ${fontSize.md[size]};
 
-    @media (max-width: 991.98px) {
-      font-size: ${fontSize.md[size]};
+    @media (min-width: 992px) {
+      font-size: ${fontSize.lg[size]};
     }
   `;
 };

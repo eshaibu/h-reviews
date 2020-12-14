@@ -43,12 +43,15 @@ export const ReviewList = () => {
             <Review review={review} key={index} />
           ))}
           <div className={paginationContainer}>
-            <Dropdown onChange={onLimitChange} options={limitsPerPage} value={`${_limit}`} />
+            <div>
+              <span>Page Limit</span>
+              <Dropdown onChange={onLimitChange} options={limitsPerPage} value={`${_limit}`} />
+            </div>
             <Pagination
               activePage={_page}
               itemsCountPerPage={_limit}
               totalItemsCount={totalCount}
-              pageRangeDisplayed={5}
+              pageRangeDisplayed={3}
               onChange={onPageClick}
               innerClass={paginationStyle}
             />

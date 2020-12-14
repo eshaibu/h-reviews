@@ -8,10 +8,14 @@ export const reviewsContainer = css`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  padding: 30px 25px;
+  padding: 25px 15px;
   min-height: 70vh;
   border-radius: 1rem;
   ${contentWidth}
+
+  @media (min-width: 480px) {
+    padding: 30px 25px;
+  }
 `;
 
 export const title = css`
@@ -37,17 +41,17 @@ export const reviewDiv = css`
   }
 
   .author {
-    ${getTextStyle({ size: 's5', color: 'gray', weight: 'bold' })}
+    ${getTextStyle({ size: 's4', color: 'gray', weight: 'bold' })}
   }
 
   .published {
-    ${getTextStyle({ size: 's5', color: 'gray', marginSpace: [8, 0, 0] })}
+    ${getTextStyle({ size: 's4', color: 'gray', marginSpace: [8, 0, 0] })}
   }
 `;
 
 export const reviewHeader = css`
   display: flex;
-  height: 40px;
+  height: 38px;
   align-items: center;
 `;
 
@@ -83,9 +87,14 @@ export const paginationStyle = css`
   li {
     display: inline-block;
     color: ${colors.gray4};
-    height: 40px;
-    padding: 8px 16px;
+    height: 34px;
+    padding: 5px 10px;
     border: 1px solid ${colors.gray2};
+
+    @media (min-width: 480px) {
+      height: 38px;
+      padding: 8px 14px;
+    }
 
     a {
       color: ${colors.gray4};
@@ -120,23 +129,32 @@ export const paginationContainer = css`
   flex-direction: column;
   margin: 2rem 0;
 
-  > div:first-of-type {
-    display: flex;
-    justify-content: flex-end;
-    height: 40px;
-    
-    > div {
-      width: 12rem;
-    }
-  }
-  
-  .Dropdown-control {
+  .Dropdown-root, .Dropdown-control {
     height: 100%;
   }
   
-  ul {
+  > div:first-of-type, ul {
     display: flex;
     justify-content: flex-end;
+    height: 34px;
+    
+    @media (min-width: 480px) {
+      height: 38px;
+    }
+  }
+  
+  > div:first-of-type {
+    align-items: center;
+    
+    span {
+      margin-right: 1rem;
+    }
+  }
+  
+  ul {
+    > div {
+      width: 12rem;
+    }
   }
   
   @media (min-width: 992px) {
@@ -147,6 +165,7 @@ export const paginationContainer = css`
     > div:first-of-type {
       margin:bottom: 1rem;
       justify-content: flex-start;
+      display: flex;
       flex: 1;
     }
     

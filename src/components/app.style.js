@@ -10,8 +10,6 @@ export const container = css`
 `;
 
 export const headerBackground = css`
-  width: 100%;
-  height: 480px;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -26,32 +24,39 @@ export const headerBackground = css`
   z-index: -1;
   border-bottom-right-radius: 60% 10%;
   border-bottom-left-radius: 60% 10%;
+  width: 100%;
+  height: 200px;
 
-  @media (max-width: 991.98px) {
-    max-height: 320px;
+  @media (min-width: 480px) {
+    height: 320px;
   }
 
-  @media (max-width: 479.98px) {
-    max-height: 200px;
+  @media (min-width: 992px) {
+    height: 480px;
   }
 `;
 
 export const contentWidth = css`
-  width: 70%;
-  max-width: 1440px;
+  width: 90%;
+  margin-bottom: 1rem;
 
-  @media (max-width: 991.98px) {
+  @media (min-width: 480px) {
     width: 80%;
   }
 
-  @media (max-width: 479.98px) {
-    width: 90%;
+  @media (min-width: 992px) {
+    width: 70%;
+    max-width: 1440px;
   }
 `;
 
 export const headerText = css`
-  margin: 40px auto 60px;
   ${contentWidth}
+  margin: 30px auto 40px;
+
+  @media (min-width: 575px) {
+    margin: 40px auto 60px;
+  }
 
   p:first-of-type {
     ${getTextStyle({ size: 's3', color: 'white', weight: 'bold', marginSpace: [0, 0, 12] })}

@@ -24,7 +24,7 @@ export const Review = (props) => {
         </div>
         <ChannelIcon className={mLeft16} />
       </div>
-      <p className="">{review.headline}</p>
+      <p>{review.headline}</p>
       <p>{review.comment}</p>
       {review.positiveFeedback && (
         <div className={feedbackDiv}>
