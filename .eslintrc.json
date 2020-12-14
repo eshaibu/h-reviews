@@ -29,6 +29,7 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/state-in-constructor": "off",
         "react/self-closing-comp": "warn",
+        "camelcase": "warn",
         "no-unused-vars": "warn",
         "import/no-named-as-default": "off",
         "react/require-default-props": "off",

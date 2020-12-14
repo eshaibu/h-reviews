@@ -2,8 +2,8 @@ import { cx } from '@emotion/css';
 import { arrayOf, func, string } from 'prop-types';
 import { checkboxStyle } from './form-fields.style';
 
-const Checkbox = ({ name, label, selectedChannels, onChange, className = '' }) => {
-  const isChecked = selectedChannels.includes(name);
+const Checkbox = ({ name, label, selectedOptions, onChange, className = '' }) => {
+  const isChecked = selectedOptions.includes(name);
 
   return (
     <div className={cx(checkboxStyle, className)}>
@@ -22,7 +22,7 @@ const Checkbox = ({ name, label, selectedChannels, onChange, className = '' }) =
 
 Checkbox.propTypes = {
   name: string.isRequired,
-  selectedChannels: arrayOf(string).isRequired,
+  selectedOptions: arrayOf(string).isRequired,
   label: string,
   onChange: func.isRequired,
   className: string,

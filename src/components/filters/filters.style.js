@@ -3,7 +3,6 @@ import { colors } from '../../utils/style-helpers';
 
 export const filterContainer = css`
   width: 100%;
-  font-weight: 600;
 `;
 
 export const filterInputsDiv = css`
@@ -29,8 +28,9 @@ export const filterInputsDiv = css`
       margin-right: 16px;
     }
 
-    > div:last-of-type {
+    > div:nth-of-type(2) {
       margin-right: 0;
+      margin-top: 0;
     }
   }
 `;
@@ -43,6 +43,12 @@ export const filterCheckboxDiv = css`
   > div {
     margin-bottom: 0.8rem;
   }
+`;
+
+export const filterRadioDiv = css`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
 `;
 
 export const toggleButton = css`

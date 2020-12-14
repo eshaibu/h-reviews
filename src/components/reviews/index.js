@@ -12,11 +12,13 @@ import { Review } from './review.component';
 import Filter from '../filters';
 
 export const ReviewList = () => {
+  const [showFilter, setShowFilter] = useState(false);
   const [toFetch, setToFetch] = useState(false);
   const [_page, setCurrentPage] = useState(1);
   const [_limit, setLimit] = useState(10);
   const [channels, setChannels] = useState([]);
-  // const [score, setScore] = useState('');
+  // eslint-disable-next-line camelcase
+  const [score, setScore] = useState('');
 
   const reviews = useSelector((state) => state.reviews);
   const { data, error, loading, totalCount } = reviews;
@@ -25,12 +27,13 @@ export const ReviewList = () => {
   const { search: locationQuery } = useLocation();
   const { push: historyPush } = useHistory();
 
-  const filterString = JSON.stringify({ _page, _limit, channel: channels });
+  const filterString = JSON.stringify({ _page, _limit, channel: channels, score_gte: score });
 
   const keyMap = {
     _page: setCurrentPage,
     _limit: setLimit,
     channel: setChannels,
+    score_gte: setScore,
   };
 
   // repopulate filters on component  mount
@@ -47,6 +50,7 @@ export const ReviewList = () => {
         }
         keyMap[key](cleanedValue);
       });
+      setShowFilter(true);
     }
     setToFetch(true);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -54,9 +58,12 @@ export const ReviewList = () => {
   // update url and fetch filtered reviews
   useEffect(() => {
     if (toFetch) {
-      const filterObject = JSON.parse(filterString);
+      let filterObject = JSON.parse(filterString);
+      if (!filterObject.score_gte) {
+        const { score_gte, ...rest } = filterObject;
+        filterObject = rest;
+      }
       const queryFilters = queryString.stringify(filterObject);
-      console.log('dispatch>>>>>');
       historyPush({ search: queryFilters });
       dispatch(getReviews(queryFilters));
     }
@@ -82,9 +89,19 @@ export const ReviewList = () => {
     setChannels(updatedChannels);
   };
 
+  const onScoreChange = (event) => {
+    setCurrentPage(1);
+    setScore(event.target.value);
+  };
+
   const clearFilters = () => {
     setCurrentPage(1);
     setChannels([]);
+    setScore('');
+  };
+
+  const toggleFilter = () => {
+    setShowFilter(!showFilter);
   };
 
   return (
@@ -92,8 +109,12 @@ export const ReviewList = () => {
       <h1 className={title}>{!loading && !error && totalCount} Reviews</h1>
       <Filter
         selectedChannels={channels}
+        selectedScore={score}
         onChannelChange={onChannelChange}
+        onScoreChange={onScoreChange}
         clearFilters={clearFilters}
+        toggleFilter={toggleFilter}
+        showFilter={showFilter}
       />
 
       {!loading && !error && (

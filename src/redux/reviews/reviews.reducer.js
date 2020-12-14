@@ -1,4 +1,4 @@
-import { ADD_REVIEWS, GET_REVIEWS, RESET_REVIEWS, REQUEST_ERROR } from './reviews.action';
+import { ADD_REVIEWS, GET_REVIEWS, REQUEST_ERROR } from './reviews.action';
 
 const initialValue = {
   loading: false,
@@ -28,8 +28,6 @@ export const reviewsReducer = (state = initialValue, action) => {
         error: action.payload,
         loading: false,
       };
-    case RESET_REVIEWS:
-      return { ...state, ...initialValue };
     default:
       return state;
   }

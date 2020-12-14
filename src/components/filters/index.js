@@ -1,24 +1,26 @@
-import { useState } from 'react';
-import { arrayOf, func, string } from 'prop-types';
+import { arrayOf, bool, func, string } from 'prop-types';
 import {
   filterContainer,
   filterInputsDiv,
   filterCheckboxDiv,
+  filterRadioDiv,
   resetButton,
   toggleButton,
 } from './filters.style';
 import Checkbox from '../form-fields/checkbox';
-
-const channels = ['AIRBNB', 'HOLIDU', 'BOOKINGCOM'];
+import { channelOptions, scoreOptions } from '../../utils/constants';
+import Radio from '../form-fields/radio';
 
 const Filter = (props) => {
-  const { selectedChannels, onChannelChange, clearFilters } = props;
-
-  const [showFilter, setShowFilter] = useState(false);
-
-  const toggleFilter = () => {
-    setShowFilter(!showFilter);
-  };
+  const {
+    onScoreChange,
+    selectedScore,
+    selectedChannels,
+    onChannelChange,
+    showFilter,
+    toggleFilter,
+    clearFilters,
+  } = props;
 
   return (
     <div className={filterContainer}>
@@ -31,13 +33,29 @@ const Filter = (props) => {
             <div>
               <span>Channels</span>
               <div className={filterCheckboxDiv}>
-                {channels.map((channel, index) => (
+                {channelOptions.map((channel, index) => (
                   <Checkbox
                     key={index}
                     onChange={onChannelChange}
-                    selectedChannels={selectedChannels}
+                    selectedOptions={selectedChannels}
                     name={channel}
                     label={channel}
+                  />
+                ))}
+              </div>
+            </div>
+            <div>
+              <span>Scores</span>
+              <div className={filterRadioDiv}>
+                {scoreOptions.map((score, index) => (
+                  <Radio
+                    key={index}
+                    onChange={onScoreChange}
+                    selected={selectedScore}
+                    name="score"
+                    id={`${index}-score`}
+                    label={score.text}
+                    value={score.value}
                   />
                 ))}
               </div>
@@ -60,7 +78,11 @@ const Filter = (props) => {
 Filter.propTypes = {
   selectedChannels: arrayOf(string).isRequired,
   onChannelChange: func.isRequired,
+  onScoreChange: func.isRequired,
+  selectedScore: string,
   clearFilters: func.isRequired,
+  toggleFilter: func.isRequired,
+  showFilter: bool.isRequired,
 };
 
 export default Filter;
