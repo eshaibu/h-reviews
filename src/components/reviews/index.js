@@ -60,6 +60,7 @@ export const ReviewList = () => {
     if (toFetch) {
       let filterObject = JSON.parse(filterString);
       if (!filterObject.score_gte) {
+        // eslint-disable-next-line camelcase
         const { score_gte, ...rest } = filterObject;
         filterObject = rest;
       }
