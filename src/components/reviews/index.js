@@ -54,16 +54,15 @@ export const ReviewList = () => {
 
   return (
     <div className={reviewsContainer}>
+      <h1 className={title}>{!loading && !error && totalCount} Reviews</h1>
+      <Filter
+        selectedChannels={channels}
+        onChannelChange={onChannelChange}
+        clearFilters={clearFilters}
+      />
+
       {!loading && !error && (
         <>
-          <h1 className={title}>{totalCount} Reviews</h1>
-
-          <Filter
-            selectedChannels={channels}
-            onChannelChange={onChannelChange}
-            clearFilters={clearFilters}
-          />
-
           {data.map((review, index) => (
             <Review review={review} key={index} />
           ))}

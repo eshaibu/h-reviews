@@ -20,7 +20,7 @@ export const reviewsContainer = css`
 `;
 
 export const title = css`
-  ${getTextStyle({ size: 's1', weight: 'bold', marginSpace: [0, 0, 30] })}
+  ${getTextStyle({ size: 's1', weight: 'bold', marginSpace: [0, 0, 20] })}
 `;
 
 export const mLeft16 = css`

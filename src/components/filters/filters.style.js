@@ -3,7 +3,6 @@ import { colors } from '../../utils/style-helpers';
 
 export const filterContainer = css`
   width: 100%;
-  margin-bottom: 2rem;
   font-weight: 600;
 `;
 
@@ -13,12 +12,11 @@ export const filterInputsDiv = css`
 
   > div {
     flex: 0 0 100%;
-    margin-bottom: 2rem;
-    margin-right: 0;
+    margin-bottom: 1rem;
   }
 
-  > div:first-of-type {
-    margin-bottom: 1rem;
+  > div:nth-of-type(2) {
+    margin-top: 2rem;
   }
 
   @media (min-width: 576px) {
@@ -47,10 +45,35 @@ export const filterCheckboxDiv = css`
   }
 `;
 
+export const toggleButton = css`
+  display: inline-block;
+  margin-bottom: 2rem;
+  min-width: 10rem;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 1rem 1.2rem;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  border-radius: 2px;
+  border: 1px solid ${colors.blue};
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: ${colors.blue};
+  background-color: ${colors.white};
+
+  &:hover {
+    color: ${colors.primary};
+    border: 1px solid ${colors.primary};
+    opacity: 0.8;
+  }
+`;
+
 export const resetButton = css`
   display: inline-block;
-  margin-top: 1.6rem;
-  margin-bottom: 0;
+  margin-bottom: 3rem;
   min-width: 10rem;
   font-weight: 600;
   text-align: center;
@@ -70,5 +93,9 @@ export const resetButton = css`
 
   &:hover {
     opacity: 0.8;
+  }
+
+  &:disabled {
+    pointer-events: none;
   }
 `;
