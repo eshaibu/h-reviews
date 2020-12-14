@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { arrayOf, func, string } from 'prop-types';
-import { filterContainer, filterInputsDiv, filterCheckboxDiv, resetButton, toggleButton } from './filters.style';
+import {
+  filterContainer,
+  filterInputsDiv,
+  filterCheckboxDiv,
+  resetButton,
+  toggleButton,
+} from './filters.style';
 import Checkbox from '../form-fields/checkbox';
 
 const channels = ['AIRBNB', 'HOLIDU', 'BOOKINGCOM'];

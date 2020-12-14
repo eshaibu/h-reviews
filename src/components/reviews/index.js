@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from 'react-js-pagination';
+import queryString from 'query-string';
+import { useHistory, useLocation } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { paginationContainer, paginationStyle, reviewsContainer, title } from './reviews.style';
@@ -10,21 +12,55 @@ import { Review } from './review.component';
 import Filter from '../filters';
 
 export const ReviewList = () => {
+  const [toFetch, setToFetch] = useState(false);
   const [_page, setCurrentPage] = useState(1);
   const [_limit, setLimit] = useState(10);
   const [channels, setChannels] = useState([]);
-  const [score, setScore] = useState('');
+  // const [score, setScore] = useState('');
 
   const reviews = useSelector((state) => state.reviews);
   const { data, error, loading, totalCount } = reviews;
 
+  const dispatch = useDispatch();
+  const { search: locationQuery } = useLocation();
+  const { push: historyPush } = useHistory();
+
   const filterString = JSON.stringify({ _page, _limit, channel: channels });
 
-  const dispatch = useDispatch();
+  const keyMap = {
+    _page: setCurrentPage,
+    _limit: setLimit,
+    channel: setChannels,
+  };
 
+  // repopulate filters on component  mount
   useEffect(() => {
-    dispatch(getReviews(filterString));
-  }, [filterString, getReviews]);
+    if (locationQuery) {
+      const queryParams = queryString.parse(locationQuery);
+      Object.entries(queryParams).forEach(([key, value]) => {
+        let cleanedValue = value;
+        if (key === '_page' || key === '_limit') {
+          cleanedValue = parseInt(value, 10);
+        }
+        if (key === 'channel') {
+          cleanedValue = Array.isArray(value) ? value : [value];
+        }
+        keyMap[key](cleanedValue);
+      });
+    }
+    setToFetch(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // update url and fetch filtered reviews
+  useEffect(() => {
+    if (toFetch) {
+      const filterObject = JSON.parse(filterString);
+      const queryFilters = queryString.stringify(filterObject);
+      console.log('dispatch>>>>>');
+      historyPush({ search: queryFilters });
+      dispatch(getReviews(queryFilters));
+    }
+  }, [filterString, toFetch, dispatch, historyPush]);
 
   const onLimitChange = (item) => {
     setCurrentPage(1);
@@ -47,7 +83,6 @@ export const ReviewList = () => {
   };
 
   const clearFilters = () => {
-    console.log('clearFilters');
     setCurrentPage(1);
     setChannels([]);
   };
