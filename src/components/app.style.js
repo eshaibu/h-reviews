@@ -54,7 +54,7 @@ export const headerText = css`
   ${contentWidth}
   margin: 30px auto 40px;
 
-  @media (min-width: 575px) {
+  @media (min-width: 576px) {
     margin: 40px auto 60px;
   }
 

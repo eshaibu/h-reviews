@@ -11,6 +11,7 @@ export const reviewsContainer = css`
   padding: 25px 15px;
   min-height: 70vh;
   border-radius: 1rem;
+  color: ${colors.primary};
   ${contentWidth}
 
   @media (min-width: 480px) {

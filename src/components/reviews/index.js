@@ -3,30 +3,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import Pagination from 'react-js-pagination';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import queryString from 'query-string';
 import { paginationContainer, paginationStyle, reviewsContainer, title } from './reviews.style';
 import { getReviews } from '../../redux/reviews';
 import { limitsPerPage } from '../../utils/constants';
 import { Review } from './review.component';
+import Filter from '../filters';
 
 export const ReviewList = () => {
   const [_page, setCurrentPage] = useState(1);
   const [_limit, setLimit] = useState(10);
+  const [channels, setChannels] = useState([]);
+  const [score, setScore] = useState('');
+
   const reviews = useSelector((state) => state.reviews);
   const { data, error, loading, totalCount } = reviews;
 
-  const filterJsonString = JSON.stringify({ _page, _limit });
+  const paginationString = JSON.stringify({ _page, _limit });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const filterObject = JSON.parse(filterJsonString);
-    const queryFilters = queryString.stringify(filterObject);
-    console.log('queryFilters', queryFilters);
-    dispatch(getReviews(queryFilters));
-  }, [filterJsonString, getReviews]);
+    dispatch(getReviews(paginationString));
+  }, [paginationString, getReviews]);
 
   const onLimitChange = (item) => {
+    setCurrentPage(1);
     setLimit(parseInt(item.value, 10));
   };
 
@@ -34,11 +35,34 @@ export const ReviewList = () => {
     setCurrentPage(page);
   };
 
+  const filterCheckboxOnChange = (event) => {
+    const { name, checked } = event.target;
+    const updatedChannels = checked
+      ? [...channels, name]
+      : channels.filter((item) => {
+          return item !== name;
+        });
+    setChannels(updatedChannels);
+    console.log('setFilters', updatedChannels);
+  };
+
+  const clearFilters = () => {
+    console.log('clearFilters');
+  };
+
   return (
     <div className={reviewsContainer}>
       {!loading && !error && (
         <>
           <h1 className={title}>{totalCount} Reviews</h1>
+
+          <Filter
+            selectedChannels={channels}
+            checkBoxOnChange={filterCheckboxOnChange}
+            clearFilters={clearFilters}
+            applyFilters={clearFilters}
+          />
+
           {data.map((review, index) => (
             <Review review={review} key={index} />
           ))}
